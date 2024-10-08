@@ -14,12 +14,16 @@ void ofApp::setup() {
 		movers[i].debug();
 	}
 	// Setting up background color
-	ofBackground(60, 179, 113);
+	//ofBackground(60, 179, 113);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-
+	// Updating movers
+	for (int i = 0; i < moversAmount; i++) {
+		movers[i].friction();
+		movers[i].update();
+	}
 }
 
 //--------------------------------------------------------------
@@ -27,6 +31,11 @@ void ofApp::draw() {
 	// Displaying FPS
 	string fps = "FPS: " + ofToString(std::round(ofGetFrameRate() * 100) / 100);
 	ofDrawBitmapString(fps, 5, 15);
+
+	// Displaying movers
+	for (int i = 0; i < moversAmount; i++) {
+		movers[i].display();
+	}
 }
 
 //--------------------------------------------------------------

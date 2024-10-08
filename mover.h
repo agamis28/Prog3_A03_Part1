@@ -12,9 +12,12 @@ class Mover
 	float mu;
 
 public:
-	Mover(glm::vec2 position, float mass); // Constructor
+	Mover(glm::vec2, float); // Constructor
 
 	void update();
+	void applyForce(glm::vec2);
+	void friction();
+	void display();
 	void debug();
 };
 
