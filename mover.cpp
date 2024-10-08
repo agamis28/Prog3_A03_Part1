@@ -18,6 +18,6 @@ void Mover::update() {
 }
 
 void Mover::debug() {
-	std::cout << "position: " << position << "\n";
+	std::cout << "position: (" << position << ") ";
 	std::cout << "mass: " << mass << "\n";
 }
