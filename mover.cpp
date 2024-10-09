@@ -38,7 +38,19 @@ void Mover::friction() {
 	applyForce(friction);
 }
 
-// NEEDS EDGES FUNCTION
+// Blocks mover from going out of the edges of the screen
+void Mover::edges() {
+	// If beyond right and left edges, clamp the X position
+	if (position.x > ofGetWidth() - radius || position.x < radius) {
+		velocity.x *= -1;
+		position.x = std::clamp(position.x, radius, (float)ofGetWidth() - radius);
+	}
+	// If beyond top and bottom edges, clamp the Y position
+	if (position.y > ofGetHeight() - radius || position.y < radius) {
+		velocity.y *= -1;
+		position.y = std::clamp(position.y, radius, (float)ofGetHeight() - radius);
+	}
+}
 
 // Display a mover ball with white transparent fill and thin boarder
 void Mover::display() {

@@ -17,6 +17,7 @@ public:
 	void update();
 	void applyForce(glm::vec2);
 	void friction();
+	void edges();
 	void display();
 	void debug();
 };

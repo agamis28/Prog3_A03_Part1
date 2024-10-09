@@ -24,8 +24,22 @@ void ofApp::setup() {
 void ofApp::update() {
 	// Updating movers
 	for (int i = 0; i < moversAmount; i++) {
+
+		// Updating movers for any applying wind
+		if (ofGetMousePressed()) {
+			glm::vec2 mouse = glm::vec2(ofGetMouseX(), ofGetMouseY());
+
+			//std::cout << "*Mouse Pressed*\nMouse location: (" << mouse << ")\n";
+
+			glm::vec2 centerOfScreen = glm::vec2((ofGetWidth() / 2), (ofGetHeight() / 2));
+			glm::vec2 wind = centerOfScreen - mouse;
+
+			movers[i].applyForce(wind);
+		}
+
 		//movers[i].friction();
-		//movers[i].update();
+		movers[i].update();
+		movers[i].edges();
 	}
 }
 
