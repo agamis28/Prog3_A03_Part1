@@ -9,20 +9,23 @@ void ofApp::setup() {
 	srand(time(0));
 	// Spawning randomized movers
 	randomizeMovers();
+
+	// Debugging movers stats
 	for (int i = 0; i < moversAmount; i++) {
 		std::cout << "mover #" << i << ": ";
 		movers[i].debug();
 	}
+
 	// Setting up background color
-	//ofBackground(60, 179, 113);
+	ofBackground(60, 179, 113);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	// Updating movers
 	for (int i = 0; i < moversAmount; i++) {
-		movers[i].friction();
-		movers[i].update();
+		//movers[i].friction();
+		//movers[i].update();
 	}
 }
 
@@ -44,7 +47,7 @@ void ofApp::randomizeMovers() {
 	for (int i = 0; i < moversAmount; i++) {
 		glm::vec2 randomPosition = glm::vec2((1 + rand() % (ofGetWidth())), (1 + rand() % (ofGetHeight())));
 		float randomMass = 1 + rand() % 8;
-		movers.push_back(Mover(randomPosition, randomMass));
+		movers.emplace_back(Mover(randomPosition, randomMass));
 	}
 }
 
