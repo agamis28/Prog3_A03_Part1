@@ -3,15 +3,24 @@
 #include <iostream>
 
 // Mover Constructor
-Mover::Mover(glm::vec2 position, float mass) : position(position), mass(mass), velocity(0.0f, 0.0f), acceleration(0.0f, 0.0f), radius(mass * 5), mu(0.01f) {}
+Mover::Mover(glm::vec2 position, float mass) : position(position), mass(mass), velocity(0.0f, 0.0f), acceleration(0.0f, 0.0f), radius(mass * 5.0f), mu(0.01f) {}
 
 // Adding acceleration to velocity, then adding the velocity to the position, then reset the acceleration
 void Mover::update() {
 	// Acceleration changes velocity
 	velocity += acceleration;
 
+	//// Limiting Velocity (Movers going too fast)
+	//float maxVelocity = 5.0f;
+	//if (glm::length(velocity) > maxVelocity) {
+	//	velocity = glm::normalize(velocity) * maxVelocity;
+	//}
+
 	// Velocity changes position
 	position += velocity;
+
+	// Debug velocity
+	//std::cout << "Velocity X: " << velocity.x << " Y:" << velocity.y << "\n";
 
 	// Reset acceleration each update
 	acceleration = glm::vec2(0.0f, 0.0f);
@@ -25,17 +34,20 @@ void Mover::applyForce(glm::vec2 force) {
 
 // Applying friction to self (mover)
 void Mover::friction() {
-	// Get direction of friction (opposite of velocity, normalized)
-	glm::vec2 friction = glm::normalize(velocity) * -1;
+	// Make sure velocity is not zero before normalizing it
+	if (glm::length(velocity) > 0) {
+		// Get direction of friction (opposite of velocity)
+		glm::vec2 friction = velocity * -1;
 
-	// Magnitude of friction
-	float normal = mass;
+		// Magnitude of friction
+		float normal = mass;
 
-	// Simplified by ignoring gravity constant
-	friction = glm::normalize(friction) * (mu * normal);
+		// Simplified by ignoring gravity constant and normalize friction direction
+		friction = glm::normalize(friction) * (mu * normal);
 
-	// Apply friction as a force
-	applyForce(friction);
+		// Apply friction as a force
+		applyForce(friction);
+	}
 }
 
 // Blocks mover from going out of the edges of the screen

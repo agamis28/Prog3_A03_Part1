@@ -29,6 +29,7 @@ void ofApp::update() {
 		if (ofGetMousePressed()) {
 			glm::vec2 mouse = glm::vec2(ofGetMouseX(), ofGetMouseY());
 
+			// Debug Mouse Pressed and Location Pressed
 			//std::cout << "*Mouse Pressed*\nMouse location: (" << mouse << ")\n";
 
 			glm::vec2 centerOfScreen = glm::vec2((ofGetWidth() / 2), (ofGetHeight() / 2));
@@ -37,7 +38,7 @@ void ofApp::update() {
 			movers[i].applyForce(wind);
 		}
 
-		//movers[i].friction();
+		movers[i].friction();
 		movers[i].update();
 		movers[i].edges();
 	}
