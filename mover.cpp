@@ -3,24 +3,20 @@
 #include <iostream>
 
 // Mover Constructor
-Mover::Mover(glm::vec2 position, float mass) : position(position), mass(mass), velocity(0.0f, 0.0f), acceleration(0.0f, 0.0f), radius(mass * 5.0f), mu(0.01f) {}
+Mover::Mover(glm::vec2 position, float mass) : position(position), mass(mass), velocity(0.0f, 0.0f), acceleration(0.0f, 0.0f), radius(mass * 5.0f), mu(0.02f) {}
 
 // Adding acceleration to velocity, then adding the velocity to the position, then reset the acceleration
 void Mover::update() {
 	// Acceleration changes velocity
 	velocity += acceleration;
 
-	//// Limiting Velocity (Movers going too fast)
-	//float maxVelocity = 5.0f;
-	//if (glm::length(velocity) > maxVelocity) {
-	//	velocity = glm::normalize(velocity) * maxVelocity;
-	//}
-
 	// Velocity changes position
 	position += velocity;
 
-	// Debug velocity
-	//std::cout << "Velocity X: " << velocity.x << " Y:" << velocity.y << "\n";
+#if defined(debug_velocity)
+	// Debug velocity on update
+	std::cout << "Velocity X: " << velocity.x << " Y:" << velocity.y << "\n";
+#endif // debug_velocity
 
 	// Reset acceleration each update
 	acceleration = glm::vec2(0.0f, 0.0f);

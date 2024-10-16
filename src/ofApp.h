@@ -8,12 +8,16 @@ class ofApp : public ofBaseApp {
 	std::vector<Mover> movers;
 	int moversAmount;
 
+	glm::vec2 centerOfScreen;
+	glm::vec2 mouse;
+
 public:
 	void setup();
 	void update();
 	void draw();
 
 	void randomizeMovers();
+	void drawArrow(glm::vec2, glm::vec2, float);
 
 	void keyPressed(int key);
 	void keyReleased(int key);

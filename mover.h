@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 
+//#define debug_velocity
+
 class Mover
 {
 	glm::vec2 position;
